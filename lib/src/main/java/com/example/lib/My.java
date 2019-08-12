@@ -1,26 +1,31 @@
-
 package com.example.lib;
-
 
 public class My {
 	public static void main(String[] args) {
-		System.out.println(vasea(3, new int[]{1,2,5}));
+		System.out.println(coinChange(12, new int[]{1,5,10}));
 	}
 
-	public static int vasea(int numar, int[] monede){
+	private static int coinChange(int numar, int[] monede){
 		int[] optiuni = new int[numar + 1];
 		optiuni[0] = 1;
-		for(int i:monede){
-			int j =0;
-			while(j++ < optiuni.length){
-				if(i <= j){
-					optiuni[j]+= j-i;
-					System.out.print(optiuni[j]);
+		int suma;
+		for(int monedaTip:monede){
+			suma =0;
+			while(suma++ < optiuni.length-1){
+				if(monedaTip <= suma){
+					optiuni[suma]+= optiuni[suma-monedaTip];
+					printArray(optiuni);
 				}
 				System.out.println();
 			}
 		}
-		return 7;
+		return optiuni[numar];
+	}
+
+	private static void printArray(int[] valori){
+		for(int i:valori) {
+			System.out.print(i);
+		}
 	}
 
 
